@@ -1,0 +1,33 @@
+
+// Bootstrap Variables
+$icon-font-path: '../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
+
+// Import Bootstrap
+@import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  font-family: 'Lato', sans-serif;
+}
+
+header {
+  height: 50px;
+  background: #507299;
+}
+
+.icon {
+  color: #082238;
+}
