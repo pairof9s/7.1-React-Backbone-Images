@@ -3,14 +3,43 @@ var React = require('react');
 
 var ImageHeader = React.createClass({
     render: function(){
+
       return (
         <div className="headbar">
-          <a href="{{show}}"><span className="form-icon glyphicon glyphicon-plus-sign" /></a>
+          <button onClick={this.ImageForm} className="form-icon"><span className="glyphicon glyphicon-plus-sign" /></button>
         </div>
       )
     },
 
 });
+
+var ImageForm = React.createClass({
+    getInitialState: function() {
+        return {
+          'submitForm': false
+        };
+    },
+    onClick: function() {
+        this.setState({'submitForm': true});
+    },
+    render: function(){
+      return (
+        <div>
+          <form className="form-space">
+            <div className="form-field col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
+            <input type="text" name="pic-url" placeholder="Image URL" />
+            </div>
+            <div className="form-field col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
+            <input type="text" name="pic-caption" placeholder="Image Location" ></input>
+            </div>
+            <button type='cancel' class='btn btn-md btn-default button' id="can-img">CANCEL</button>
+            <button type='submit' class='btn btn-md btn-success button' id="sub-img"><span id="glyphicon glyphicon-picture sub-icon" />ADD IMAGE{ this.state.submitForm ? <Entry /> : null }</button>
+          </form>
+        </div>
+      )
+    },
+});
+
 
 var ImageList = React.createClass({
   componentDidMount: function(){
@@ -50,5 +79,6 @@ var ImageItem = React.createClass({
 module.exports = {
   'ImageHeader': ImageHeader,
   'ImageItem': ImageItem,
-  'ImageList': ImageList
+  'ImageList': ImageList,
+  'ImageForm': ImageForm
 };

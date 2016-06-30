@@ -1,9 +1,10 @@
-//var $ = require('jquery');
+var $ = require('jquery');
 var _ = require('underscore');
 var React = require('react');
 var ReactDOM = require('react-dom');
 
 var models = require('./models/images.js');
+var ImageCollection = require('./models/images.js').ImageCollection;
 var ImageList = require('./components/listing.jsx').ImageList;
 var ImageHeader = require('./components/listing.jsx').ImageHeader;
 // var ImageForm = require('./components/form.jsx').ImageForm;
@@ -18,7 +19,15 @@ descriptions.add([
   {'title': 'Halema‘uma‘u Volcano', 'location': 'Hawaii', 'imageURL': 'https://images.unsplash.com/photo-1448772917253-74bbbe249b30?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=ac2da829a6becaafb99bf10934f79399'}
 ]);
 
-ReactDOM.render(
-  React.createElement(ImageList, {collection: descriptions}),
-  document.getElementById('container')
-);
+$(function(){
+  var picCollection = new ImageCollection();
+//ReactDOM.render(<Search />, document.getElementById('container'));
+  picCollection.fetch().done(function(){
+    ReactDOM.render(
+      React.createElement(ImageList, {collection: descriptions}),
+      document.getElementById('container')
+    );
+  });
+
+  picCollection.fetch();
+});

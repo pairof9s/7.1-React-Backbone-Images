@@ -1,6 +1,13 @@
 var React = require('react');
 
 var ImageForm = React.createClass({
+    getInitialState: function() {
+        return {
+          'submitForm': false};
+    },
+    onClick: function() {
+        this.setState({'submitForm': true});
+    },
     render: function(){
       return (
         <div>
@@ -12,17 +19,22 @@ var ImageForm = React.createClass({
             <input type="text" name="pic-caption" placeholder="Image Location" ></input>
             </div>
             <button type='cancel' class='btn btn-md btn-default button' id="can-img">CANCEL</button>
-            <button type='submit' class='btn btn-md btn-success button' id="sub-img"><span id="glyphicon glyphicon-picture sub-icon" />ADD IMAGE</button>
+            <button type='submit' class='btn btn-md btn-success button' id="sub-img"><span id="glyphicon glyphicon-picture sub-icon" />ADD IMAGE{this.state.submitForm ? <Entry /> : null}</button>
           </form>
         </div>
       )
     },
-
 });
 
-<div class="form-group">
-<label for="email">Email:</label>
-<input class="input" type="email" name="email" id='email' placeholder="Email address" ></input>
-</div>
-<button type='submit' class='btn btn-sm btn-info button'>Create Contact</button>
-</div>
+var Entry = React.createClass({
+    render: function() {
+        return (
+
+        );
+    }
+});
+
+module.exports = {
+  'ImageForm': ImageForm,
+  'Entry': Entry
+};
