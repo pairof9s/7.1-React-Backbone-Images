@@ -2,37 +2,55 @@ var React = require('react');
 
 
 var ImageHeader = React.createClass({
+    toggleForm: function(event){
+      this.setState({'ImageForm': !this.state.ImageForm});
+    },
     render: function(){
-
       return (
         <div className="headbar">
-          <button onClick={this.ImageForm} className="form-icon"><span className="glyphicon glyphicon-plus-sign" /></button>
+          <button onClick={this.props.toggleForm} className="form-icon"><span className="glyphicon glyphicon-plus-sign" /></button>
         </div>
       )
     },
-
 });
 
 var ImageForm = React.createClass({
     getInitialState: function() {
         return {
-          'submitForm': false
+          'imageURL': '',
+          'title': '',
+          'location': '',
+          'toggleForm': false
         };
     },
     onClick: function() {
-        this.setState({'submitForm': true});
+        this.setState({'toggleForm': true});
+    },
+    onSubmit: function(event){
+      event.preventDefault();
+      this.props.images.create({
+        'imageURL': this.state.picUrl,
+        'title': this.state.picTitle,
+        'location': this.state.picLocation
+      });
     },
     render: function(){
+      if(!this.props.toggleForm){
+        return <div />
+      }
       return (
         <div>
           <form className="form-space">
             <div className="form-field col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
-            <input type="text" name="pic-url" placeholder="Image URL" />
+            <input type="text" name="picUrl" placeholder="Image URL" />
             </div>
             <div className="form-field col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
-            <input type="text" name="pic-caption" placeholder="Image Location" ></input>
+            <input type="text" name="picTitle" placeholder="Image Title" ></input>
             </div>
-            <button type='cancel' class='btn btn-md btn-default button' id="can-img">CANCEL</button>
+            <div className="form-field col-xs-offset-1 col-sm-offset-2 col-xs-10 col-sm-8">
+            <input type="text" name="picLocation" placeholder="Image Location" ></input>
+            </div>
+            <button class='btn btn-md btn-default button' id="can-img"><a onClick={toggleForm}>CANCEL</a></button>
             <button type='submit' class='btn btn-md btn-success button' id="sub-img"><span id="glyphicon glyphicon-picture sub-icon" />ADD IMAGE{ this.state.submitForm ? <Entry /> : null }</button>
           </form>
         </div>
